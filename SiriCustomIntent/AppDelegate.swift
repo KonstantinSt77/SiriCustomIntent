@@ -7,40 +7,75 @@
 //
 
 import UIKit
+import Intents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        initSiriShortcuts()
+
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    func initSiriShortcuts() {
+        let isSiriSetupSuccessfully = UserDefaults.standard.bool(forKey: "isSiriSetupSuccessfully")
+        if !isSiriSetupSuccessfully {
+            setupSiri()
+        }
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    func setupSiri() {
+        INPreferences.requestSiriAuthorization { status in
+            switch status {
+            case .authorized:
+                self.donateUnlockScooterIntent()
+                break
+            case .notDetermined:
+                debugPrint("INPreferences requestSiriAuthorization status: notDetermined")
+                break
+            case .restricted:
+                debugPrint("INPreferences requestSiriAuthorization status: restricted")
+                break
+            case .denied:
+                debugPrint("INPreferences requestSiriAuthorization status: denied")
+                break
+            }
+        }
     }
 
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    func donateUnlockScooterIntent() {
+        if #available(iOS 12.0, *) {
+            let intent = FindFactsAboutNumberIntent()
+            intent.suggestedInvocationPhrase = "Find Facts About Number"
+            let interaction = INInteraction(intent: intent, response: nil)
+            interaction.donate { error in
+                if let receivedError = error {
+                    debugPrint("FindFactsAboutNumberIntent Donate Error \(receivedError)")
+                } else {
+                    debugPrint("FindFactsAboutNumberIntent Donate Success")
+                    self.openSiriSettingsForRecordShoertcut()
+                }
+            }
+        }
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    func openSiriSettingsForRecordShoertcut() {
+        UserDefaults.standard.set(true, forKey: "isSiriSetupSuccessfully")
+        DispatchQueue.main.async {
+            let alertController = UIAlertController (title: "Siri needs record new shortcut command", message: "Open Settings -> Siri & Search, for record new Siri Shortcut", preferredStyle: .alert)
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                guard let settingsUrl = URL(string: "App-Prefs:root=Siri") else {
+                    return
+                }
+                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+            }
+            alertController.addAction(settingsAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            alertController.addAction(cancelAction)
+            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
 }
-
