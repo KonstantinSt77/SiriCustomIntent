@@ -76,6 +76,7 @@
 		B5F8D327222D7CB700B1AFE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5F8D335222D7CE800B1AFE7 /* NumbersApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersApiService.swift; sourceTree = "<group>"; };
 		B5F8D339222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NumberFactsIntent.intentdefinition; sourceTree = "<group>"; };
+		B5F8D33D222D85B200B1AFE7 /* SiriCustomIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SiriCustomIntent.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +129,7 @@
 		B5F8D2FD222D7A0B00B1AFE7 /* SiriCustomIntent */ = {
 			isa = PBXGroup;
 			children = (
+				B5F8D33D222D85B200B1AFE7 /* SiriCustomIntent.entitlements */,
 				B5F8D2FE222D7A0B00B1AFE7 /* AppDelegate.swift */,
 				B5F8D335222D7CE800B1AFE7 /* NumbersApiService.swift */,
 				B5F8D300222D7A0B00B1AFE7 /* MainViewController.swift */,
@@ -236,6 +238,11 @@
 				TargetAttributes = {
 					B5F8D2FA222D7A0B00B1AFE7 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Siri = {
+								enabled = 1;
+							};
+						};
 					};
 					B5F8D313222D7CB700B1AFE7 = {
 						CreatedOnToolsVersion = 10.1;
@@ -489,6 +496,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SiriCustomIntent/SiriCustomIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 487D8YHE27;
 				INFOPLIST_FILE = SiriCustomIntent/Info.plist;
@@ -509,6 +517,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SiriCustomIntent/SiriCustomIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 487D8YHE27;
 				INFOPLIST_FILE = SiriCustomIntent/Info.plist;

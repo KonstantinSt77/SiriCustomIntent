@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         INPreferences.requestSiriAuthorization { status in
             switch status {
             case .authorized:
-                self.donateUnlockScooterIntent()
+                self.donateIntent(withNumber: "18")
                 break
             case .notDetermined:
                 debugPrint("INPreferences requestSiriAuthorization status: notDetermined")
@@ -46,10 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func donateUnlockScooterIntent() {
+    func donateIntent(withNumber number: String) {
         if #available(iOS 12.0, *) {
             let intent = FindFactsAboutNumberIntent()
-            intent.suggestedInvocationPhrase = "Find Facts About Number"
+            intent.number = number
+            intent.suggestedInvocationPhrase = "Find facts about number"
             let interaction = INInteraction(intent: intent, response: nil)
             interaction.donate { error in
                 if let receivedError = error {

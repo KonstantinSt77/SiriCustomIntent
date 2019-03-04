@@ -11,37 +11,25 @@ import Intents
 class IntentHandler: INExtension, FindFactsAboutNumberIntentHandling {
     let numbersApiService = NumbersApiService()
 
-
     func confirm(intent: FindFactsAboutNumberIntent, completion: @escaping (FindFactsAboutNumberIntentResponse) -> Void) {
-
+        if let number = intent.number {
+            completion(FindFactsAboutNumberIntentResponse.confirmation(number: number))
+        } else {
+            completion(FindFactsAboutNumberIntentResponse(code: FindFactsAboutNumberIntentResponseCode.failure, userActivity: nil))
+        }
     }
 
     func handle(intent: FindFactsAboutNumberIntent, completion: @escaping (FindFactsAboutNumberIntentResponse) -> Void) {
-
+        if let number = intent.number {
+            numbersApiService.findFactsAbout(number: number) { facts, error in
+                if let error = error {
+                    completion(FindFactsAboutNumberIntentResponse.failueWithError(error.localizedDescription))
+                } else if let facts = facts {
+                    completion(FindFactsAboutNumberIntentResponse.success(fact: facts))
+                }
+            }
+        } else {
+            completion(FindFactsAboutNumberIntentResponse(code: FindFactsAboutNumberIntentResponseCode.failure, userActivity: nil))
+        }
     }
-
-
-//    func confirm(intent: UnlockScooterIntent, completion: @escaping (UnlockScooterIntentResponse) -> Void) {
-//        siriService.findScooter { qrCode, error in
-//            if let receivedQRCode = qrCode {
-//                completion(UnlockScooterIntentResponse.success(qrCode: receivedQRCode))
-//            } else if let receivedError = error {
-//                completion(UnlockScooterIntentResponse.failure(error: receivedError.localizedDescription))
-//            } else {
-//                completion(UnlockScooterIntentResponse(code: .failure, userActivity: nil))
-//            }
-//        }
-//    }
-//
-//    func handle(intent: UnlockScooterIntent, completion: @escaping (UnlockScooterIntentResponse) -> Void) {
-//        siriService.rentScooter { success, error in
-//            if let _ = success {
-//                completion(UnlockScooterIntentResponse(code: .successUnlock, userActivity: nil))
-//            } else if let receivedError = error {
-//                completion(UnlockScooterIntentResponse.failure(error: receivedError.localizedDescription))
-//            } else {
-//                completion(UnlockScooterIntentResponse(code: .failure, userActivity: nil))
-//            }
-//        }
-//    }
 }

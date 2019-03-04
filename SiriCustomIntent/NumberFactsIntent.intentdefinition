@@ -16,29 +16,29 @@
 	<array>
 		<dict>
 			<key>INIntentCategory</key>
-			<string>generic</string>
+			<string>search</string>
 			<key>INIntentDescriptionID</key>
 			<string>QNqI5h</string>
 			<key>INIntentLastParameterTag</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>INIntentName</key>
 			<string>FindFactsAboutNumber</string>
 			<key>INIntentParameterCombinations</key>
 			<dict>
-				<key></key>
+				<key>number</key>
 				<dict>
 					<key>INIntentParameterCombinationIsPrimary</key>
 					<true/>
 					<key>INIntentParameterCombinationSubtitle</key>
 					<string></string>
 					<key>INIntentParameterCombinationSubtitleID</key>
-					<string>KaGF8u</string>
+					<string>EQC1JL</string>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string></string>
+					<string>Find facts about number</string>
 					<key>INIntentParameterCombinationTitleID</key>
-					<string>lTuY5M</string>
+					<string>67y66Y</string>
 				</dict>
 			</dict>
 			<key>INIntentParameters</key>
@@ -51,7 +51,7 @@
 					<key>INIntentParameterSupportsMultipleValues</key>
 					<false/>
 					<key>INIntentParameterTag</key>
-					<integer>1</integer>
+					<integer>2</integer>
 					<key>INIntentParameterType</key>
 					<string>String</string>
 				</dict>
@@ -62,7 +62,7 @@
 				<array>
 					<dict>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>Sorry i cant find any facts, because ${error}</string>
+						<string>Sorry i cant find any facts</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>pe0Xmr</string>
 						<key>INIntentResponseCodeName</key>
@@ -89,6 +89,16 @@
 						<string>confirmation</string>
 						<key>INIntentResponseCodeSuccess</key>
 						<true/>
+					</dict>
+					<dict>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>Sorry i cant find any facts, because ${error}</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>UAJXBD</string>
+						<key>INIntentResponseCodeName</key>
+						<string>failueWithError</string>
+						<key>INIntentResponseCodeSuccess</key>
+						<false/>
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
@@ -136,15 +146,15 @@
 			<key>INIntentRestrictions</key>
 			<integer>0</integer>
 			<key>INIntentTitle</key>
-			<string>Find Facts About Number</string>
+			<string>Find facts about number</string>
 			<key>INIntentTitleID</key>
 			<string>WEdZGg</string>
 			<key>INIntentType</key>
 			<string>Custom</string>
 			<key>INIntentUserConfirmationRequired</key>
-			<false/>
+			<true/>
 			<key>INIntentVerb</key>
-			<string>Do</string>
+			<string>Find</string>
 		</dict>
 	</array>
 </dict>
