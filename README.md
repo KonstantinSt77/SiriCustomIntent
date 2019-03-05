@@ -1,10 +1,8 @@
 # Siri Shortcuts Custom Intent
 
-For demonstration siri custom intents i choosed open api Numbers that provide facts about searched number.
-Main App have a textField where user can write a numbers and label where facts shows.
-Siri Extension work with phrase "Find facts about number" after that siri asked you to confirm you request and after that show and tell the found facts about last searched number from main app.
+For demonstration Siri custom intents I choosed open api Numbers that provides facts about the searched number. Main App has a textField where a user can write a number and a label where the fact is shown. Siri Extension works with the phrase "Find facts about number" after that Siri asks you to confirm your request, and after that shows and tells the found fact about the last searched number from the main app.
 
-Firs of all you need to create 2 files:
+First of all you need to create 2 files:
 ```
 SiriCustomIntent.entitlements
 ```
@@ -22,12 +20,12 @@ I used a Intents Framework for Siri Intent:
 ```
 import Intents
 ```
-Also we need a group defaults if you want to pass data from main app to extension
+Also we need group defaults if you want to pass data from the main app to extension.
 
 ```
 let groupDefaults = UserDefaults(suiteName: Constants.groupsUserDefaultsDomain)
 ```
-In this example I request Siri Authorization
+In this example I request Siri Authorization.
 ```
 INPreferences.requestSiriAuthorization { status in
     switch status {
@@ -46,7 +44,7 @@ INPreferences.requestSiriAuthorization { status in
     }
 }
 ```
-After request authorization we need to donate intent
+After request authorization we need to donate intent.
 ```
 func donateIntent() {
     if #available(iOS 12.0, *) {
@@ -65,7 +63,7 @@ func donateIntent() {
     }
 }
 ```
-Also i save bool value for the initial setup for siri and save first number to search
+Also I save bool value for the initial setup for siri and save first number to search
 ```
 func saveSiriSettings() {
     groupDefaults?.set(true, forKey: Constants.siriSetupSuccessDefaultsKey)
@@ -76,12 +74,13 @@ func setDefaultNumber() {
 }
 ```
 
-I create API Service for getting facts about number from open api
+I create API Service for getting facts about a number from open api
+
 ```
 class NumbersApiService
 ```
 
-I used URLSession because its simple way to perform basic requests and also one more plus to not use third-party libraries for siri extension
+I used URLSession because its a simple way to perform basic requests and also it allows not to use third-party libraries for siri extension.
 ```
 class NumbersApiService {
     // MARK: - Private Properties
@@ -116,7 +115,7 @@ class NumbersApiService {
     }
 }
 ```
-The most interesting is now in the extension for Siri, it has 2 methods
+Now the most interesting, in the extension for Siri, it has 2 methods:
 
 ```
 func confirm(intent: FindFactsAboutNumberIntent, completion: @escaping (FindFactsAboutNumberIntentResponse) -> Void)
@@ -127,8 +126,9 @@ and
 func handle(intent: FindFactsAboutNumberIntent, completion: @escaping (FindFactsAboutNumberIntentResponse) -> Void) 
 ```
 
-After creating your own intent, Xcode generates the class itself with your intent as well as the accompanying methods for working with it
-After creating your custom completions you need to write logic in this methods
+After creating your own intent, Xcode generates the class itself with your intent as well as the accompanying methods for working with it.
+
+After creating your custom completions you need to write logic in this methods:
 
 ```
 func confirm(intent: FindFactsAboutNumberIntent, completion: @escaping (FindFactsAboutNumberIntentResponse) -> Void) {
