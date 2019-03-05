@@ -16,7 +16,6 @@ class MainViewController: UIViewController {
 
     // MARK: - Private Properties
     private let numbersApiService = NumbersApiService()
-    private let appDelegate = AppDelegate()
 
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
@@ -24,15 +23,7 @@ class MainViewController: UIViewController {
 
         setupView()
         setupSettings()
-    }
-
-    private func setupView() {
-        findButton.layer.cornerRadius = findButton.frame.height / 2
-        findButton.clipsToBounds = true
-    }
-
-    private func setupSettings() {
-        textField.delegate = self
+        fetchSettings()
     }
 
     // MARK: - Actions
@@ -44,13 +35,29 @@ class MainViewController: UIViewController {
     }
 
     // MARK: - Private methods
+    private func setupView() {
+        findButton.layer.cornerRadius = findButton.frame.height / 2
+        findButton.clipsToBounds = true
+    }
+
+    private func setupSettings() {
+        textField.delegate = self
+    }
+
+    private func fetchSettings() {
+        if let lastNumber = UserDefaults.standard.string(forKey: Constants.lastSearchNumberDefaultsKey) {
+            textField.text = lastNumber
+            getFactsAbout(number: lastNumber)
+        }
+    }
+    
     private func getFactsAbout(number: String) {
         numbersApiService.findFactsAbout(number: number) { facts, error in
             if let error = error {
                 self.resultLabel.text = error.localizedDescription
             } else if let facts = facts {
                 self.resultLabel.text = facts
-                self.appDelegate.donateIntent(withNumber: number)
+                UserDefaults(suiteName: Constants.groupsUserDefaultsDomain)!.set(number, forKey: Constants.lastSearchNumberDefaultsKey)
             }
         }
     }

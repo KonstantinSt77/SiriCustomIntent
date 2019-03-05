@@ -25,37 +25,24 @@
 			<string>FindFactsAboutNumber</string>
 			<key>INIntentParameterCombinations</key>
 			<dict>
-				<key>number</key>
+				<key></key>
 				<dict>
 					<key>INIntentParameterCombinationIsPrimary</key>
-					<true/>
+					<false/>
 					<key>INIntentParameterCombinationSubtitle</key>
 					<string></string>
 					<key>INIntentParameterCombinationSubtitleID</key>
-					<string>EQC1JL</string>
+					<string>FxqMoH</string>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>Find facts about number</string>
+					<string></string>
 					<key>INIntentParameterCombinationTitleID</key>
-					<string>67y66Y</string>
+					<string>1V6DEr</string>
 				</dict>
 			</dict>
 			<key>INIntentParameters</key>
-			<array>
-				<dict>
-					<key>INIntentParameterDisplayPriority</key>
-					<integer>1</integer>
-					<key>INIntentParameterName</key>
-					<string>number</string>
-					<key>INIntentParameterSupportsMultipleValues</key>
-					<false/>
-					<key>INIntentParameterTag</key>
-					<integer>2</integer>
-					<key>INIntentParameterType</key>
-					<string>String</string>
-				</dict>
-			</array>
+			<array/>
 			<key>INIntentResponse</key>
 			<dict>
 				<key>INIntentResponseCodes</key>

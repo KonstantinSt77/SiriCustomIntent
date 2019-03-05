@@ -16,7 +16,7 @@ class NumbersApiService {
     // MARK: - Public methods
     public func findFactsAbout(number: String, completion: @escaping ((_ responce: String?,_ error: Error?) -> Void)) {
         dataTask?.cancel()
-        if var urlComponents = URLComponents(string: "http://numbersapi.com/\(number)") {
+        if var urlComponents = URLComponents(string: "\(Constants.apiBasePathString)\(number)") {
             guard let url = urlComponents.url else {
                 return
             }
@@ -35,6 +35,7 @@ class NumbersApiService {
                     }
                 }
             }
+            
             dataTask?.resume()
         }
     }

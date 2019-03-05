@@ -24,6 +24,9 @@
 		B5F8D33A222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D339222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition */; };
 		B5F8D33B222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D339222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition */; };
 		B5F8D33C222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D339222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition */; };
+		B5F8D33F222E80D200B1AFE7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D33E222E80D200B1AFE7 /* Constants.swift */; };
+		B5F8D340222E80D200B1AFE7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D33E222E80D200B1AFE7 /* Constants.swift */; };
+		B5F8D341222E80D200B1AFE7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8D33E222E80D200B1AFE7 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,8 @@
 		B5F8D335222D7CE800B1AFE7 /* NumbersApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersApiService.swift; sourceTree = "<group>"; };
 		B5F8D339222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NumberFactsIntent.intentdefinition; sourceTree = "<group>"; };
 		B5F8D33D222D85B200B1AFE7 /* SiriCustomIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SiriCustomIntent.entitlements; sourceTree = "<group>"; };
+		B5F8D33E222E80D200B1AFE7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B5F8D342222E85EC00B1AFE7 /* SiriIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SiriIntent.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,10 +134,11 @@
 		B5F8D2FD222D7A0B00B1AFE7 /* SiriCustomIntent */ = {
 			isa = PBXGroup;
 			children = (
-				B5F8D33D222D85B200B1AFE7 /* SiriCustomIntent.entitlements */,
+				B5F8D33E222E80D200B1AFE7 /* Constants.swift */,
 				B5F8D2FE222D7A0B00B1AFE7 /* AppDelegate.swift */,
 				B5F8D335222D7CE800B1AFE7 /* NumbersApiService.swift */,
 				B5F8D300222D7A0B00B1AFE7 /* MainViewController.swift */,
+				B5F8D33D222D85B200B1AFE7 /* SiriCustomIntent.entitlements */,
 				B5F8D339222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition */,
 				B5F8D302222D7A0B00B1AFE7 /* Main.storyboard */,
 				B5F8D307222D7A0D00B1AFE7 /* LaunchScreen.storyboard */,
@@ -145,6 +151,7 @@
 		B5F8D315222D7CB700B1AFE7 /* SiriIntent */ = {
 			isa = PBXGroup;
 			children = (
+				B5F8D342222E85EC00B1AFE7 /* SiriIntent.entitlements */,
 				B5F8D316222D7CB700B1AFE7 /* IntentHandler.swift */,
 				B5F8D318222D7CB700B1AFE7 /* Info.plist */,
 			);
@@ -239,6 +246,9 @@
 					B5F8D2FA222D7A0B00B1AFE7 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.Siri = {
 								enabled = 1;
 							};
@@ -246,6 +256,11 @@
 					};
 					B5F8D313222D7CB700B1AFE7 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					B5F8D31C222D7CB700B1AFE7 = {
 						CreatedOnToolsVersion = 10.1;
@@ -305,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5F8D33F222E80D200B1AFE7 /* Constants.swift in Sources */,
 				B5F8D301222D7A0B00B1AFE7 /* MainViewController.swift in Sources */,
 				B5F8D2FF222D7A0B00B1AFE7 /* AppDelegate.swift in Sources */,
 				B5F8D336222D7CE800B1AFE7 /* NumbersApiService.swift in Sources */,
@@ -319,6 +335,7 @@
 				B5F8D317222D7CB700B1AFE7 /* IntentHandler.swift in Sources */,
 				B5F8D337222D7CE800B1AFE7 /* NumbersApiService.swift in Sources */,
 				B5F8D33B222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition in Sources */,
+				B5F8D340222E80D200B1AFE7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +346,7 @@
 				B5F8D323222D7CB700B1AFE7 /* IntentViewController.swift in Sources */,
 				B5F8D338222D7CE800B1AFE7 /* NumbersApiService.swift in Sources */,
 				B5F8D33C222D7E6600B1AFE7 /* NumberFactsIntent.intentdefinition in Sources */,
+				B5F8D341222E80D200B1AFE7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +592,7 @@
 		B5F8D332222D7CB700B1AFE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SiriIntent/SiriIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 487D8YHE27;
 				INFOPLIST_FILE = SiriIntent/Info.plist;
@@ -593,6 +612,7 @@
 		B5F8D333222D7CB700B1AFE7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SiriIntent/SiriIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 487D8YHE27;
 				INFOPLIST_FILE = SiriIntent/Info.plist;

@@ -14,15 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let groupDefaults = UserDefaults(suiteName: Constants.groupsUserDefaultsDomain)
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        setDefaultNumber()
         initSiriShortcuts()
 
         return true
     }
 
     func initSiriShortcuts() {
-        let isSiriSetupSuccessfully = UserDefaults.standard.bool(forKey: "isSiriSetupSuccessfully")
-        if !isSiriSetupSuccessfully {
+        if let isSiriSetupSuccessfully = groupDefaults?.bool(forKey: Constants.siriSetupSuccessDefaultsKey), !isSiriSetupSuccessfully {
             setupSiri()
         }
     }
@@ -31,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         INPreferences.requestSiriAuthorization { status in
             switch status {
             case .authorized:
-                self.donateIntent(withNumber: "18")
+                self.donateIntent()
                 break
             case .notDetermined:
                 debugPrint("INPreferences requestSiriAuthorization status: notDetermined")
@@ -46,10 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func donateIntent(withNumber number: String) {
+    func donateIntent() {
         if #available(iOS 12.0, *) {
             let intent = FindFactsAboutNumberIntent()
-            intent.number = number
             intent.suggestedInvocationPhrase = "Find facts about number"
             let interaction = INInteraction(intent: intent, response: nil)
             interaction.donate { error in
@@ -58,21 +59,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 } else {
                     debugPrint("FindFactsAboutNumberIntent Donate Success")
                     self.openSiriSettingsForRecordShoertcut()
+                    self.saveSiriSettings()
                 }
             }
         }
     }
 
+    func saveSiriSettings() {
+        groupDefaults?.set(true, forKey: Constants.siriSetupSuccessDefaultsKey)
+    }
+
+    func setDefaultNumber() {
+        groupDefaults?.set("18", forKey: Constants.lastSearchNumberDefaultsKey)
+    }
+
     func openSiriSettingsForRecordShoertcut() {
-        UserDefaults.standard.set(true, forKey: "isSiriSetupSuccessfully")
         DispatchQueue.main.async {
             let alertController = UIAlertController (title: "Siri needs record new shortcut command", message: "Open Settings -> Siri & Search, for record new Siri Shortcut", preferredStyle: .alert)
             let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
                 guard let settingsUrl = URL(string: "App-Prefs:root=Siri") else {
                     return
                 }
+
                 UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
             }
+            
             alertController.addAction(settingsAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
             alertController.addAction(cancelAction)
