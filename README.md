@@ -156,6 +156,6 @@ func handle(intent: FindFactsAboutNumberIntent, completion: @escaping (FindFacts
 
 See the Demo:
 
-<img src="https://github.com/KonstantinSt77/SiriCustomIntent/blob/master/demo.gif" width="40" height="40" />
+<img src="https://github.com/KonstantinSt77/SiriCustomIntent/blob/master/demo.gif" width="300" height="150" />
 
 
